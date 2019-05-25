@@ -5,6 +5,6 @@ def call (def mvnHome,def pom, def goal){
       pom: "${pom}",
       goals: "${goal}",
       opts: '-Xms1024m -Xmx4096m',
-      deployerId: 'deployer-unique-id',
+      
   )
 }
