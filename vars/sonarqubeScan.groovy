@@ -1,4 +1,4 @@
-def call(def mvnHome, def goal, def sonarqubeServer){
+def call(def mvnHome, def goal, def pom, def sonarqubeServer){
   withSonarQubeEnv("${sonarqubeServer}") {
      rtMavenRun (
       tool: "${mvnHome}",
