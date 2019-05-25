@@ -1,5 +1,10 @@
-def call(def mvnHome, def sonarqubeServer){
+def call(def mvnHome, def goal, def sonarqubeServer){
   withSonarQubeEnv("${sonarqubeServer}") {
-  sh "'${mvnHome}/bin/mvn' clean package sonar:sonar"
+     rtMavenRun (
+      tool: "${mvnHome}",
+      pom: "${pom}",
+      goals: "${goal}",
+      opts: '-Xms1024m -Xmx4096m',
+  )
   }
 }
