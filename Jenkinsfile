@@ -21,6 +21,19 @@ node(label: 'master'){
     def containerPort = 8080
     def lastSuccessfulBuildID = 0
     
+    //Check for Previous-Successful-Build
+    stage('Get Last Successful Build Number'){
+        def build = currentBuild.previousBuild
+        while (build != null) {
+            if (build.result == "SUCCESS")
+            {
+                lastSuccessfulBuildID = build.id as Integer
+                break
+            }
+            build = build.previousBuild
+        }
+        echo "${lastSuccessfulBuildID}"
+    }
     //Git Stage
     stage('Git-Checkout'){
         gitClone "${gitURL}","${repoBranch}"    
@@ -48,7 +61,7 @@ node(label: 'master'){
     
     //Remove extra image
     stage('Remove image'){
-        removeDockerImage "${dockerImageRemove}","${dockerImageName}","${dockerRegistryUserName}","${dockerRegistryUserName}","${lastSuccessfulBuildID}"
+        removeDockerImage "${dockerImageRemove}","${dockerImageName}","${dockerRegistryUserName}","${applicationName}","${lastSuccessfulBuildID}"
     }
     
     //Download Docker Image
@@ -56,21 +69,7 @@ node(label: 'master'){
         downloadDockerImage "${dockerImageName}", "${BUILD_NUMBER}"
     }
     
-    //Check for Previous-Successful-Build
-    stage('Get Last Successful Build Number'){
-        def build = currentBuild.previousBuild
-        while (build != null) {
-            if (build.result == "SUCCESS")
-            {
-                lastSuccessfulBuildID = build.id as Integer
-                break
-            }
-            build = build.previousBuild
-        }
-        echo "${lastSuccessfulBuildID}"
-        
- 
-    }
+  
     
     //Delete Old running Container and run new built
     stage('Run Docker Image'){
