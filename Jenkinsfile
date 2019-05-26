@@ -55,8 +55,9 @@ node(label: 'master'){
     stage('Download Docker Image'){
         downloadDockerImage "${dockerImageName}", "${BUILD_NUMBER}"
     }
+    
+    //Check for Previous-Successful-Build
     stage('Get Last Successful Build Number'){
-        //def lastSuccessfulBuildID = 0
         def build = currentBuild.previousBuild
         while (build != null) {
             if (build.result == "SUCCESS")
