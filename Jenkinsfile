@@ -49,6 +49,7 @@ node(label: 'master'){
     //Remove extra image
     stage('Remove image'){
         removeDockerImage "${dockerImageRemove}","${dockerImageName}"
+        removeDockerImage "${dockerImageName}"
     }
     
     //Download Docker Image
