@@ -70,7 +70,7 @@ node(label: 'master'){
     //Delete Old running Container and run new built
     stage('Run Docker Image'){
         echo "Last Successful Build = ${lastSuccessfulBuildID}"
-        runDockerImage "${vmPort}","${containerPort}", "${dockerImageName}", "${BUILD_NUMBER}", "${lastSuccessfullBuild}"
+        runDockerImage "${vmPort}","${containerPort}", "${dockerImageName}", "${BUILD_NUMBER}", "${lastSuccessfulBuild}"
     }
     
 }
