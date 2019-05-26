@@ -50,6 +50,22 @@ node(label: 'master'){
         removeDockerImage "${dockerImageRemove}","${dockerImageName}"
     }
     
+    stage('Get Last Successful Build Number'){
+        def lastSuccessfulBuildID = 0
+        def build = currentBuild.previousBuild
+        while (build != null) {
+            if (build.result == "SUCCESS")
+            {
+                lastSuccessfulBuildID = build.id as Integer
+                break
+            }
+            build = build.previousBuild
+        }
+        echo "${lastSuccessfulBuildID}"
+        
+ 
+    }
+    
     //Delete Old running Container and run new built
     stage('Run Docker Image'){
         runDockerImage "${vmPort}","${containerPort}", "${dockerImageName}", "${BUILD_NUMBER}"
