@@ -5,7 +5,7 @@ node(label: 'master'){
     def repoBranch = "master"
     def ApplicationName = "mvc"
     def sonarqubeServer = "sonar"
-    def sonarqubeGoal = "sonar:sonar"
+    def sonarqubeGoal = "clean verify sonar:sonar"
     def mvnHome = "MAVEN_HOME"
     def pom = "pom.xml"
     def goal = "clean install"
