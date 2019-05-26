@@ -40,7 +40,7 @@ node(label: 'master'){
     
     //docker-image-build
     stage('Build Docker image'){
-        dockerBuild "${dockerRegistry}","${dockerCredentialID}","${dockerImageName}"
+        dockerBuildAndPush "${dockerRegistry}","${dockerCredentialID}","${dockerImageName}"
     }
     
     //Remove extra image
