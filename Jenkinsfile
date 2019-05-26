@@ -41,8 +41,8 @@ node(label: 'master'){
         mavenBuild "${artifactoryServer}","${mvnHome}","${pom}", "${goal}", "${releaseRepo}", "${snapshotRepo}"
     }
     
-    //docker-image-build
-    stage('Build Docker image'){
+    //docker-image-build and Push
+    stage('Build Docker image and Push'){
         dockerBuildAndPush "${dockerRegistry}","${dockerCredentialID}","${dockerImageName}"
     }
     
@@ -51,6 +51,10 @@ node(label: 'master'){
         removeDockerImage "${dockerImageRemove}","${dockerImageName}"
     }
     
+    //Download Docker Image
+    stage('Download Docker Image'){
+        downloadDockerImage "${dockerImageName}", "${BUILD_NUMBER}"
+    }
     stage('Get Last Successful Build Number'){
         //def lastSuccessfulBuildID = 0
         def build = currentBuild.previousBuild
