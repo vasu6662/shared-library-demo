@@ -1,7 +1,5 @@
-def call(def vmPort, def containerPort, def imageName, def tag){
-  def oldContainerTag = "${tag}"-2
-  echo "${oldContainerTag}"
-  sh "docker rm -f ${imageName}:${oldContainerTag}"
-  sh " docker run -d -p ${vmPort}:${containerPort} ${imageName}:${tag}"
+def call(def vmPort, def containerPort, def imageName, def tag,def lastSuccessfullBuild){
+  sh " docker rm -f ${imageName}_${lastSuccessfullBuild}"
+  sh " docker run -d -p --name ${imageName}_${tag} ${vmPort}:${containerPort} ${imageName}:${tag}"
 }
 
