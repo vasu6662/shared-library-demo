@@ -50,7 +50,8 @@ node(label: 'master'){
         removeDockerImage "${dockerImageRemove}","${dockerImageName}"
     }
     
-    stage(Run Docker Image){
+    //Delete Old running Container and run new built
+    stage('Run Docker Image'){
         runDockerImage "${vmPort}","${containerPort}", "${dockerImageName}", "${BUILD_NUMBER}"
     }
     
