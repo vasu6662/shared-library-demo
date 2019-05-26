@@ -17,6 +17,8 @@ node(label: 'master'){
     def dockerRegistryUserName = "anoop600"
     def dockerCredentialID = "dockerID" 
     def dockerImageName = "${dockerRegistryUserName}/${ApplicationName}"
+    def vmPort = 9999
+    def containerPort = 8080
     
     //Git Stage
     stage('Git-Checkout'){
@@ -47,6 +49,9 @@ node(label: 'master'){
     stage('Remove image'){
         removeDockerImage "${dockerImageRemove}","${dockerImageName}"
     }
-        
+    
+    stage(Run Docker Image){
+        runDockerImage "${vmPort}","${containerPort}", "${dockerImageName}", "${BUILD_NUMBER}"
+    }
     
 }
