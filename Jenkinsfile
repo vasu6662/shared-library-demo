@@ -1,8 +1,8 @@
 @Library('shared-library') _
 node(label: 'master'){
     //Variables
-    //def gitURL = "https://github.com/anoop600/MVC.git"
-    def gitURL = "https://github.com/anoop600/Angular-SpringBoot.git"
+    def gitURL = "https://github.com/anoop600/MVC.git"
+    //def gitURL = "https://github.com/anoop600/Angular-SpringBoot.git"
     def repoBranch = "master"
     def applicationName = "mvc"
     def sonarqubeServer = "sonar"
