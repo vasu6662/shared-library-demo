@@ -19,6 +19,7 @@ node(label: 'master'){
     def dockerImageName = "${dockerRegistryUserName}/${applicationName}"
     def vmPort = 9999
     def containerPort = 8080
+    def lastSuccessfulBuildID = 0
     
     //Git Stage
     stage('Git-Checkout'){
@@ -51,7 +52,7 @@ node(label: 'master'){
     }
     
     stage('Get Last Successful Build Number'){
-        def lastSuccessfulBuildID = 0
+        //def lastSuccessfulBuildID = 0
         def build = currentBuild.previousBuild
         while (build != null) {
             if (build.result == "SUCCESS")
@@ -68,7 +69,8 @@ node(label: 'master'){
     
     //Delete Old running Container and run new built
     stage('Run Docker Image'){
-        runDockerImage "${vmPort}","${containerPort}", "${dockerImageName}", "${BUILD_NUMBER}"
+        echo "Last Successful Build = ${lastSuccessfulBuildID}"
+        runDockerImage "${vmPort}","${containerPort}", "${dockerImageName}", "${BUILD_NUMBER}", "${lastSuccessfullBuild}"
     }
     
 }
