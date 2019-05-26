@@ -3,7 +3,7 @@ node(label: 'master'){
     //Variables
     def gitURL = "https://github.com/anoop600/MVC.git"
     def repoBranch = "master"
-    def ApplicationName = "mvc"
+    def applicationName = "mvc"
     def sonarqubeServer = "sonar"
     def sonarqubeGoal = "clean verify sonar:sonar"
     def mvnHome = "MAVEN_HOME"
@@ -16,7 +16,7 @@ node(label: 'master'){
     def dockerImageRemove = "registry.hub.docker.com"
     def dockerRegistryUserName = "anoop600"
     def dockerCredentialID = "dockerID" 
-    def dockerImageName = "${dockerRegistryUserName}/${ApplicationName}"
+    def dockerImageName = "${dockerRegistryUserName}/${applicationName}"
     def vmPort = 9999
     def containerPort = 8080
     
